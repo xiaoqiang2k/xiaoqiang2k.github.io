@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập Firebase</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1c1c1c;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 300px;
+      padding: 30px;
+      background: #2e2e2e;
+      border-radius: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #00aaff;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Đăng nhập</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Mật khẩu" />
+    <button onclick="login()">Đăng nhập</button>
+    <button onclick="signup()">Đăng ký</button>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyDBd5SUTVO661sr7f5kN2A2GmN-7ok2kDc",
+  authDomain: "dangnhapwed-87cdc.firebaseapp.com",
+  projectId: "dangnhapwed-87cdc",
+  storageBucket: "dangnhapwed-87cdc.firebasestorage.app",
+  messagingSenderId: "559197592143",
+  appId: "1:559197592143:web:112e0d7ff996410e95a83a",
+  measurementId: "G-R17V0WVQTF"
+};
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          document.getElementById("message").innerText = "Đăng nhập thành công!";
+        })
+        .catch((error) => {
+          document.getElementById("message").innerText = "Lỗi: " + error.message;
+        });
+    }
+
+    function signup() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          document.getElementById("message").innerText = "Đăng ký thành công!";
+        })
+        .catch((error) => {
+          document.getElementById("message").innerText = "Lỗi: " + error.message;
+        });
+    }
+  </script>
+</body>
+</html>
